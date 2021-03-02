@@ -1,15 +1,5 @@
 #pragma once
 
-/**
- * <A short one line description>
- *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
- */
 struct Matrix {
   int** value;
   int n_row;
@@ -17,139 +7,111 @@ struct Matrix {
 };
 
 /**
- * <A short one line description>
+ * Matrix multiplecation function
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
+ * Matrix multiplecation using Stroossen method
  *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param l_mtx is first matrix with free size
+ * @param r_mtx is second matrix with free size
  */
-int** Matrix_multiply(int** mtx1, int** mtx2, int n_row1, int n_col1, int n_row2, int n_col2);
+Matrix* Matrix_multiply(Matrix l_mtx, Matrix r_mtx);
 
 /**
- * <A short one line description>
+ * Simple print function with label
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param mtx matrix to print
+ * @param label that will be printed before matrix
  */
-void Matrix_print_matrix(int** mtx, int n_row, int n_col, std::string label);
+void Matrix_print_matrix(Matrix mtx, std::string label);
 
 /**
- * <A short one line description>
+ * Simple create matrix function, that fills it with random values
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param n_row new matrix height
+ * @param n_col new matrix width
+ * @return new filled matrix
  */
-int** Matrix_get_random_matrix(int n_row, int n_col);
+Matrix* Matrix_get_random_matrix(int n_row, int n_col);
 
 /**
- * <A short one line description>
- *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+* Memory allocation
+*
+* @param  new matrix height
+* @param  new matrix width
+* @return new empty matrix
  */
-int** Matrix_get_empty_matrix(int n_row, int n_col);
+Matrix* Matrix_get_empty_matrix(int n_row, int n_col);
 
 /**
- * <A short one line description>
- *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * Memory clear function
  */
-void Matrix_delete_matrix(int** mtx, int n_row);
+void Matrix_delete_matrix(Matrix* mtx);
 
 /**
- * <A short one line description>
+ * Simple create matrix function, that fills it with entered values
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param  new matrix height
+ * @param  new matrix width
+ * @return new filled matrix
  */
-int** Matrix_enter_matrix(int n_row, int n_col);
-
-// Приведение матриц к требуемому размеру
+Matrix* Matrix_enter_matrix(int n_row, int n_col);
 
 /**
- * <A short one line description>
+ * Reducing matrices to the required size
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
+ * Reduces matrix to the required size
+ * by making copy with data from imported matrix,
+ * used for squar matrices only
  *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param i_mtx
+ * @param mtx_size
+ * @return new matrix with data from i_mtx
  */
-int** Matrix_get_sized_matrix(int** i_mtx, int mtx_size, int n_row, int n_col);
-
-// Разбиение матриц на подматрицы и их заполнение
+Matrix* Matrix_get_sized_matrix(Matrix i_mtx, int mtx_size);
 
 /**
- * <A short one line description>
+ * Dividing matrices into submatrices and filling them in
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
+ * Dividing matrices into submatrices and filling them in,
+ * by making copy with data from imported matrix
  *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param i_mtx input matrix for data
+ * @param n_row height of new matrix
+ * @param n_col width of new matrix
+ * @param i_offset row offset to fill new matrix
+ * @param j_offset column offset to fill new matrix
+ * @return new filled submatrix
  */
-int** Matrix_get_filled_submatrix(int** i_mtx, int n_row, int n_col, int i_offset, int j_offset);
-
-// Копирование матрицы
-
-/**
- * <A short one line description>
- *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
- *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
- */
-int** Matrix_get_filled_matrix(int** i_mtx, int n_row, int n_col);
+Matrix* Matrix_get_filled_submatrix(Matrix i_mtx, int n_row, int n_col, int i_offset, int j_offset);
 
 /**
- * <A short one line description>
+ * Matrix copy function
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
+ * Matrix copy function, that uses Matrix_get_filled_submatrix for copy
  *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @param i_mtx input matrix for data
+ * @param n_row height of new matrix
+ * @param n_col width of new matrix
+ * @return new filled matrix
  */
-int Matrix_get_fixed_height(int** mtx, int mtx_size);
+Matrix* Matrix_get_filled_matrix(Matrix i_mtx, int n_row, int n_col);
 
 /**
- * <A short one line description>
+ * Returns fixed height (rows number)
  *
- * <Longer description>
- * <May span multiple lines or paragraphs as needed>
+ * Checks boarder of not zero data and returns it's boarder
+ * Simular to Matrix_get_fixed_width(Matrix)
  *
- * @param  Description of method's or function's input parameter
- * @param  ...
- * @return Description of the return value
+ * @return not zero data height boarder
  */
-int Matrix_get_fixed_width(int** mtx, int mtx_size);
+int Matrix_get_fixed_height(Matrix mtx);
+
+/**
+ * Returns fixed width (columns number)
+ *
+ * Checks boarder of not zero data and returns it's boarder
+ * Simular to Matrix_get_fixed_height(Matrix)
+ *
+ * @return not zero data width boarder
+ */
+int Matrix_get_fixed_width(Matrix mtx);
